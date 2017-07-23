@@ -1,0 +1,42 @@
+var STATUSCODE_START = 100
+module.exports = {
+    DAY:86399500,
+    CODE:{
+        VERIFY_INVALID:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'验证码失效'
+        },
+        VERIFY_ERROR:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'验证码错误'
+        },
+        LOGIN_TOKEN_INVALID:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'登录超时'
+        },
+        LOGIN_NO_LOGIN:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'未登录'
+        },
+        LOGIN_EMPTY:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'账号或密码不能为空'
+        },
+        USERNAME_REPTER:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'用户名重复'
+        },
+        USERNAME_INVALID:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'账号格式不符合要求'
+        },
+        USERNAME_ERROR:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'账号或密码错误'
+        },
+        USERNAME_NO_FIND:{
+            STATUSCODE:STATUSCODE_START++,
+            MSG:'没有找到此用户'
+        }
+    }
+}
