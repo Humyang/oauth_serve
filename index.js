@@ -15,7 +15,7 @@ const PORT = 3000;
 var md5 = require('md5')
 var uid = require('uid')
 
-var CONFIG = require('./lib/config.js')
+var CONFIG = require('./config.js')
 var verifyUserName = require('./method.js').verifyUserName
 
 var VERIFY = {
@@ -77,7 +77,7 @@ async function lc(ctx,token){
     let _login_check_res = await ctx.mongo
                     .db(CONFIG.dbname)
                     .collection('logined_token')
-                    .findOne({token:token})
+                    .findOne({'token':token})
 
     if(_login_check_res === null){
         throwError(CODE.LOGIN_NO_LOGIN)
@@ -97,6 +97,7 @@ router.post('/token_verify',async function(ctx){
     let token = ctx.request.fields.token
 
     let o = await lc(ctx,token)
+    console.log(o)
     ctx.body = o
 })
 router.post('/login',async function(ctx){
