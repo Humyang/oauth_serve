@@ -46,9 +46,59 @@ function throwError(obj,msg){
     throw new Error(JSON.stringify(nObj))
 }
 
-// router.post('/graphql', graphqlKoa({ schema: myGraphQLSchema,rootValue: root,
-//   graphiql: true,operationName:'RollDice' }));
+function login_check(){
+    return async function(ctx,next){
 
+        let token = ctx.request.fields.token
+        let _login_check_res = await ctx.mongo
+                    .db(CONFIG.dbname)
+                    .collection('logined_token')
+                    .findOne({token:token})
+
+        if(_login_check_res === null){
+            // throw new Error('未登陆')
+            throwError(CODE.LOGIN_NO_LOGIN)
+        }
+        if(_login_check_res.status === false){
+            throwError(CODE.LOGIN_TOKEN_INVALID)
+        }
+
+       // 将登录信息传递给上下文
+        ctx.LOGIN_STATUS = {
+            uid:_login_check_res.uid,
+            username:_login_check_res.username
+        }
+
+        await next()
+    }
+}
+async function lc(ctx,token){
+
+    let _login_check_res = await ctx.mongo
+                    .db(CONFIG.dbname)
+                    .collection('logined_token')
+                    .findOne({token:token})
+
+    if(_login_check_res === null){
+        throwError(CODE.LOGIN_NO_LOGIN)
+    }
+    if(_login_check_res.status === false){
+        throwError(CODE.LOGIN_TOKEN_INVALID)
+    }
+    return {
+        uid:_login_check_res.uid,
+        username:_login_check_res.username
+    }
+}
+router.post('/token_verify',async function(ctx){
+    // ctx.body=true
+    debugger
+    console.log('token_verify',ctx.request.fields)
+    let token = ctx.request.fields.token
+
+    let o = await lc(ctx,token)
+    ctx.body = o
+})
 router.post('/login',async function(ctx){
 
 	let fields = ctx.request.fields
@@ -92,7 +142,8 @@ router.post('/login',async function(ctx){
     let _token_stauts = {
         username:username,
         status:true,
-        token:new_token
+        token:new_token,
+        uid:_usm_pwd.uid
         // ,
         // device:fields.device
     }
@@ -240,9 +291,9 @@ async function username_check(ctx,username){
 
 
 
-router.get('/',async function(ctx){
-	ctx.throw(402, 'access_denied', { user: '4444' });
-});
+// router.get('/',async function(ctx){
+// 	ctx.throw(402, 'access_denied', { user: '4444' });
+// });
 
 
 
