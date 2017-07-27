@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Template</title>
+</head>
+<style >
+	
+#login {
+    background-color: #36474f;
+    height: 100%;
+    color: #fff;
+    font-size: 28px;
+    padding-top: 70px;
+    text-align: center
+}
+
+#login input {
+    font-size: 28px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    margin-bottom: 10px;
+    width: 80%
+}
+
+#login a {
+    color: #fff
+}
+
+a.btn_ {
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 10px
+}
+</style>
+<body>
+	<div id="login">
+	    <div class="input">
+	    	<input id="username" type="text" placeholder="账号">
+	    </div>
+	    <div>
+	    	<input id="password" type="password" placeholder="密码">
+	    </div>
+	    <a class="btn_" href="#" onClick="login()" >登录</a>
+	    <a class="btn_" " href="#" onClick="regiest()">注册</a>
+	</div>
+
+	<script type="text/javascript">
+
+		let loginServer = 'http://localhost:3000/login'
+		let regiestServer = 'http://localhost:3000/regiest'
+		let loginClient = 'http://localhost:3200/oauth_login'
+
+		function ajax(opt,data){
+
+			var xmlObj = new XMLHttpRequest()
+			xmlObj.open('POST',opt.url,true);
+
+			var formData = new FormData();
+
+			for(i in data){
+				formData.append(i,data[i])
+			}
+			xmlObj.send(formData);
+
+			return new Promise(function(reslove,reject){
+			    xmlObj.addEventListener("load", function(event){
+		        	var obj = JSON.parse(event.target.responseText)
+		        	reslove(obj)
+		    	}, false);
+			})
+		}
+		function login(){
+			var username = document.getElementById('username')
+			var password = document.getElementById('password')
+			ajax({url:loginServer},{username:username.value,password:password.value})
+				.then(function(obj){
+					// 传递tokenA给后台验证
+					ajax({url:loginClient},
+						{'token':obj.token}).then(function(res){
+							// 验证成功，得到tokenB
+							console.log(res)
+						})
+					
+				})
+		}
+		function regiest(){
+			var username = document.getElementById('username')
+			var password = document.getElementById('password')
+			ajax({url:regiestServer},{username:username.value,password:password.value})
+				.then(function(obj){
+				})
+		}
+	</script>
+</body>
+</html>
