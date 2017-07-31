@@ -9,7 +9,7 @@
     "koa-mongo": "^1.2.1",
     "koa-router": "^7.2.1",
     "md5": "^2.2.1",
-    "uid": "0.0.2"
+    "uid2": "0.0.3"
   },
   "devDependencies": {},
   "scripts": {
