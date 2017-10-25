@@ -1,0 +1,39 @@
+
+> oauth_serve@1.0.0 start /root/github/oauth_serve
+> node lib/index.js
+
+
+> oauth_serve@1.0.0 start /root/github/oauth_serve
+> node lib/index.js
+
+Wed, 25 Oct 2017 03:46:16 GMT koa deprecated Support for generators will be removed in v3. See the documentation for examples of how to convert old middleware https://github.com/koajs/koa/blob/master/docs/migration.md at lib/index.js:305:5
+Wed, 25 Oct 2017 03:46:16 GMT koa deprecated Support for generators will be removed in v3. See the documentation for examples of how to convert old middleware https://github.com/koajs/koa/blob/master/docs/migration.md at lib/index.js:305:5
+Wed, 25 Oct 2017 03:46:16 GMT koa deprecated Support for generators will be removed in v3. See the documentation for examples of how to convert old middleware https://github.com/koajs/koa/blob/master/docs/migration.md at lib/index.js:316:5
+Wed, 25 Oct 2017 03:46:16 GMT koa deprecated Support for generators will be removed in v3. See the documentation for examples of how to convert old middleware https://github.com/koajs/koa/blob/master/docs/migration.md at lib/index.js:316:5
+Running a API server at localhost:8000
+Running a API server at localhost:8000
+events.js:182
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE 0.0.0.0:8000
+    at Object.exports._errnoException (util.js:1024:11)
+    at exports._exceptionWithHostPort (util.js:1047:20)
+    at Server.setupListenHandle [as _listen2] (net.js:1319:14)
+    at listenInCluster (net.js:1367:12)
+    at Server.listen (net.js:1467:7)
+    at Application.listen (/root/github/oauth_serve/node_modules/koa/lib/application.js:64:19)
+    at Object.<anonymous> (/root/github/oauth_serve/lib/index.js:339:5)
+    at Module._compile (module.js:569:30)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:503:32)
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! oauth_serve@1.0.0 start: `node lib/index.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the oauth_serve@1.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2017-10-25T03_46_16_910Z-debug.log
