@@ -38,8 +38,9 @@ if sync_github == 1:
             close_api = get_pid_close(8000)
             if close_api == 1:
                 print 'close serve -- success'
-                print 'start serve'
-                # start server
-                subprocess_command('nohup npm run start &')
+                
             else:
                 print 'close serve -- faile'
+            print 'start serve'
+            # start server
+            subprocess_command('nohup npm run start &')
