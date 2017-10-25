@@ -33,14 +33,14 @@ print 'pull origin master -- begin'
 sync_github = run_command('git pull origin master')
 if sync_github == 1:
         print 'pull origin master -- success'
-            # close static serve and api serve
-            print 'close serve -- begin'
-            close_api = get_pid_close(8000)
-            if close_api == 1:
-                print 'close serve -- success'
-                
-            else:
-                print 'close serve -- faile'
-            print 'start serve'
-            # start server
-            subprocess_command('nohup npm run start &')
+            subprocess_command('nohup npm run start &')        # close static serve and api serve
+        print 'close serve -- begin'
+        close_api = get_pid_close(8000)
+        if close_api == 1:
+            print 'close serve -- success'
+            
+        else:
+            print 'close serve -- faile'
+        print 'start serve'
+        # start server
+        subprocess_command('nohup npm run start &')
