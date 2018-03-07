@@ -7,6 +7,7 @@
     "koa": "^2.3.0",
     "koa-better-body": "^3.0.4",
     "koa-cors": "0.0.16",
+    "koa-ejs": "^4.1.0",
     "koa-mongo": "^1.2.1",
     "koa-router": "^7.2.1",
     "md5": "^2.2.1",
@@ -15,6 +16,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node lib/index.js",
+    "debug":"node --inspect-brk lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
