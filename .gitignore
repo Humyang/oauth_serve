@@ -29,6 +29,9 @@ build/Release
 
 # Dependency directories
 node_modules/*
+!node_modules/koa-body-parsers
+!node_modules/koa-better-body
+!node_modules/koa-body
 jspm_packages
 
 # Optional npm cache directory
