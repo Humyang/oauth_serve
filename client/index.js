@@ -132,6 +132,7 @@ function oauth_login_check(_options){
 		await next()
 	}
 }
+
 module.exports = {
 	oauth_client,
 	oauth_login_check,
