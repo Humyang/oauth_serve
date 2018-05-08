@@ -86,6 +86,7 @@ function oauth_client(_options){
 }
 async function login_check(ctx,token){
 	if(!!!token){
+		console.log('!!!token:',token)
 		throwError(CODE.LOGIN_TOKEN_INVALID)
 	}
     let _login_check_res = await ctx.mongo
@@ -98,6 +99,7 @@ async function login_check(ctx,token){
         throwError(CODE.LOGIN_NO_LOGIN)
     }
     if(_login_check_res.status === false){
+		console.log('!!!_login_check_res')
         throwError(CODE.LOGIN_TOKEN_INVALID)
     }
     return _login_check_res
