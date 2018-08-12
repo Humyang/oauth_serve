@@ -3,7 +3,7 @@ var mongo = require('koa-mongo')
 const http = require('http');
 var CONFIG = require('./config.js')
 var CODE = require('./code.js')
-let login_status = 'logined_token'
+let LOGIN_STATUS = 'logined_token'
 function throwError(obj, msg) {
 	let nObj = {
 		STATUSCODE: obj.STATUSCODE,
@@ -70,7 +70,7 @@ function oauth_client(_options) {
 		// 写入登录状态
 		let _insert_res = await ctx.mongo
 			.db(_config.dbname)
-			.collection(login_status)
+			.collection(LOGIN_STATUS)
 			.insert(obj)
 
 
@@ -91,7 +91,7 @@ async function login_check(ctx, token) {
 	}
 	let _login_check_res = await ctx.mongo
 		.db(ctx._config.dbname)
-		.collection(login_status)
+		.collection(LOGIN_STATUS)
 		.findOne({ "token": token })
 
 	console.log(_login_check_res)
@@ -115,7 +115,7 @@ function oauth_login_check(_options) {
 		// }
 		//       let _login_check_res = await ctx.mongo
 		//                   .db(_config.dbname)
-		//                   .collection(login_status)
+		//                   .collection(LOGIN_STATUS)
 		//                   .findOne({"tokenB":token})
 
 		//       console.log(_login_check_res)
@@ -137,12 +137,18 @@ function oauth_login_check(_options) {
 function login_check_remote(_options) {
 	// 直接从远程 oauth 获取登录状态
 	return async function (ctx, next) {
+		console.log(123)
 		let token = ctx.header._token
 		ctx._config = Object.assign(CONFIG, _options)
 		let USER_INFO = await fetchToeknStatus(ctx, token)
 
 		console.log(USER_INFO)
-		
+		if(USER_INFO.status===false){
+			console.log('error',USER_INFO)
+			throwError(USER_INFO)
+			
+			return false
+		}
 		ctx.LOGIN_STATUS = {
 			uid: USER_INFO.uid,
 			username: USER_INFO.username
@@ -172,7 +178,7 @@ function oauth_client_remote(_options) {
 		// // 写入登录状态
 		// let _insert_res = await ctx.mongo
 		// 	.db(_config.dbname)
-		// 	.collection(login_status)
+		// 	.collection(LOGIN_STATUS)
 		// 	.insert(obj)
 
 
